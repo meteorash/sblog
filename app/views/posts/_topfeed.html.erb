@@ -1,0 +1,6 @@
+<div class="topfeed">
+<h1>Top News</h1>
+<% @posts.each do |post| %>
+    <span class="topfeed">Likes <%= post.likes %><%= link_to post.title, post %></span>
+<% end %>
+</div>

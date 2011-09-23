@@ -1,0 +1,31 @@
+<div class="feed">
+<p><%= notice %></p>
+
+<p>
+  <h2><%= @post.title %></h2>
+      <span class="timestamp">
+      <% @user = User.find(@post.user_id) %>
+      Posted by <%= @user.email %> <%= time_ago_in_words(@post.created_at) %> ago.
+    </span>
+  <% if user_signed_in? and current_user == @user %>
+  <%= link_to 'Edit Post', edit_post_path(@post) %>
+  <% end %>
+  Likes:</b> <%= @post.likes if (@post.likes != nil) %>
+</p>
+
+<p>
+  <%= @post.content %>
+</p>
+    <% if user_signed_in? and current_user != @user %>
+<%= link_to('Like Article', ) %>
+       <% end %>    <br>
+<h2>Add New Comment</h2>
+  <% if user_signed_in? %>
+<%= render "comments/form" %><br>
+  <% else %>
+   Please <%= link_to('Sign in', new_user_session_path)  %> to post a comment.
+      <% end %>  <br><br><br>
+<h2>Comments</h2>
+<%= render 'commentdisp' %>
+</div>
+
