@@ -21,6 +21,7 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @user = User.find(current_user)
     @post.user_id = @user.id
+    @post.likes = 0
 
     respond_to do |format|
       if @post.save
@@ -28,6 +29,7 @@ class PostsController < ApplicationController
                       :notice => 'Post was successfully created.') }
         format.xml  { render :xml => @post,
                       :status => :created, :location => @post }
+  #      format.js
       else
         format.html  { render :action => "new" }
         format.xml  { render :xml => @post.errors,
@@ -38,6 +40,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post.likes = @post.likes + 1
+    @post.save
 
     respond_to do |format|
       format.html  # show.html.erb
@@ -72,12 +76,13 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html  # show.html.erb
       format.xml  { render :xml => @post }
-      end
+      format.js
+    end
   end
 
-  def like
-    @post = Post.find(param[:id])
-    @post.likes = @post.likes + 1
-    @post.save
-  end
+ # def like
+ #   @post = Post.find(param[:id])
+ #   @post.likes = @post.likes + 1
+ #   @post.save
+ # end
 end

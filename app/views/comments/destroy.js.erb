@@ -1,0 +1,5 @@
+$(document).ready(function() {
+$("p.comment").bind("ajax:success", function() {
+$(this).closest("p").fadeOut();
+});
+});

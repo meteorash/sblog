@@ -7,8 +7,7 @@
 
  <tr>
   <td class="post">
-    <span class="title"><%= link_to post.title, post %></span>
-    <span class="title">Likes <%= post.likes %></span><br>
+    <span class="title"><%= link_to post.title, post %></span><br>
     <span class="content"><%=h truncate(post.content, :length => 500) %></span><br>
     <span class="timestamp">
       <% @user = User.find(post.user_id) %>
@@ -16,7 +15,7 @@
     </span>
     <% if user_signed_in? and current_user == @user %>
       <span><%= link_to 'Edit Post', edit_post_path(post) %></span>
-    <span><%= link_to 'Delete Post', post, :confirm => 'Are you sure?', :method => :delete %></span>
+    <span><%= link_to 'Delete Post', post, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => 'post' %></span>
     <% end %>
   </td>
 </tr>

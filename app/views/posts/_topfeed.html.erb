@@ -1,6 +1,7 @@
-<div class="topfeed">
-<h1>Top News</h1>
+<div class="post">
+<h1>Popular News</h1>
+  <% @posts = @posts.sort_by(&:likes).reverse %>
 <% @posts.each do |post| %>
-    <span class="topfeed">Likes <%= post.likes %><%= link_to post.title, post %></span>
+    <span class="topfeed"><%= link_to post.title, post %></span>
 <% end %>
 </div>
